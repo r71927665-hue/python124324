@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хіт Хаб | Перевірка умов у Python (if, elif, else)</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --success: #22c55e;
+            --code-bg: #090d16;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #334155;
+        }
+
+        header h1 {
+            color: var(--accent);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #334155;
+        }
+
+        h2 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #cbd5e1;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            color: #38bdf8;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            border: 1px solid #1e293b;
+        }
+
+        .keyword { color: #f472b6; font-weight: bold; }
+        .function { color: #60a5fa; }
+        .number { color: #fbbf24; }
+        .string { color: #34d399; }
+
+        /* Тренажер */
+        .simulator {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        input[type="number"] {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #475569;
+            background-color: #0f172a;
+            color: var(--text-color);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="number"]:focus {
+            border-color: var(--accent);
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .result-box {
+            background-color: var(--code-bg);
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 10px;
+        }
+
+        .result-title {
+            font-weight: bold;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .result-output {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: var(--success);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Hit Hub 🚀</h1>
+            <p>Інтерактивний урок: Перевірка умов у Python (if, elif, else)</p>
+        </header>
+
+        <!-- Теорія -->
+        <section>
+            <h2>📚 Що таке умовні оператори?</h2>
+            <p>У програмуванні часто виникає потреба виконувати різні дії залежно від певної умови. Для цього в Python використовують конструкцію розгалуження:</p>
+            <ul style="margin-left: 20px; margin-bottom: 15px; color: #cbd5e1;">
+                <li><strong>if</strong> — перевіряє початкову умову. Якщо вона істинна (True), виконується блок коду всередині нього.</li>
+                <li><strong>elif</strong> (скорочення від *else if*) — перевіряє додаткову умову, якщо попередні виявилися хибними.</li>
+                <li><strong>else</strong> — спрацьовує тоді, коли жодна з попередніх умов не виконалася.</li>
+            </ul>
+
+            <p>Приклад коду на Python:</p>
+            <pre><code><span class="keyword">x</span> = <span class="number">10</span>
+
+<span class="keyword">if</span> x &gt; <span class="number">0</span>:
+    <span class="function">print</span>(<span class="string">"Число додатне"</span>)
+<span class="keyword">elif</span> x &lt; <span class="number">0</span>:
+    <span class="function">print</span>(<span class="string">"Число від'ємне"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"Це нуль"</span>)</code></pre>
+        </section>
+
+        <!-- Практичний тренажер -->
+        <section>
+            <h2>🎮 Інтерактивний тренажер</h2>
+            <p>Введіть будь-яке число та натисніть кнопку, щоб побачити, який результат видасть аналогічний код на Python під час перевірки умов.</p>
+            
+            <div class="simulator">
+                <div class="input-group">
+                    <label for="userNumber">Введіть число (змінна x):</label>
+                    <input type="number" id="userNumber" placeholder="Наприклад: 15" value="5">
+                </div>
+                
+                <button onclick="checkCondition()">Запустити перевірку</button>
+
+                <div class="result-box">
+                    <div class="result-title">Результат виконання (Вивід консолі):</div>
+                    <div id="resultOutput" class="result-output">Натисніть кнопку, щоб побачити результат...</div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Hit Hub. Навчайтеся програмуванню легко та захопливо!</p>
+        </footer>
+    </div>
+
+    <script>
+        function checkCondition() {
+            // Отримуємо значення з поля введення
+            const inputVal = document.getElementById('userNumber').value;
+            const outputElement = document.getElementById('resultOutput');
+
+            // Перевіряємо, чи введено число
+            if (inputVal === '' || isNaN(inputVal)) {
+                outputElement.style.color = '#f87171'; // Червоний колір для попередження
+                outputElement.textContent = "Помилка: будь ласка, введіть коректне число!";
+                return;
+            }
+
+            const x = Number(inputVal);
+            let resultText = "";
+
+            // Логіка Python if-elif-else у JavaScript
+            if (x > 0) {
+                resultText = 'print("Число додатне") ➔ Число додатне';
+            } else if (x < 0) {
+                resultText = 'print("Число від\'ємне") ➔ Число від\'ємне';
+            } else {
+                resultText = 'print("Це нуль") ➔ Це нуль';
+            }
+
+            // Додаткова перевірка для цікавості (парність)
+            if (x % 2 === 0 && x !== 0) {
+                resultText += " (Також це парне число)";
+            } else if (x !== 0) {
+                resultText += " (Також це непарне число)";
+            }
+
+            outputElement.style.color = 'var(--success)';
+            outputElement.textContent = resultText;
+        }
+    </script>
+</body>
+</html>
